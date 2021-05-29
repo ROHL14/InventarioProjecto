@@ -22,9 +22,9 @@ const objDatos = {
 eventListeners();
 
 function eventListeners() {
-  btnNew.addEventListener("click", agregarUsuario);
   document.addEventListener("DOMContentLoaded", cargarDatos);
   searchText.addEventListener("input", aplicarFiltro);
+  btnNew.addEventListener("click", agregarUsuario);
   btnCancelar.addEventListener("click", cancelarUsuario);
   miForm.addEventListener("submit", guardarUsuario);
 }
@@ -88,12 +88,12 @@ function crearTabla() {
     objDatos.recordsFilter = objDatos.records.map((item) => item);
   } else {
     objDatos.recordsFilter = objDatos.records.filter((item) => {
-      const { nombres, apellidos, usuario, ntipo } = item;
+      const { username, nombre, email, rol } = item;
       if (
-        nombres.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        apellidos.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        usuario.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        ntipo.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
+        username.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        nombre.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        email.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        rol.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
       ) {
         return item;
       }
@@ -104,17 +104,17 @@ function crearTabla() {
   let html = "";
   objDatos.recordsFilter.forEach((item, index) => {
     if (index >= recordIni && index <= recordFin) {
-      const { nombres, apellidos, id_usuario, ntipo, usuario } = item;
+      const { id, username, nombre, email, rol } = item;
       html += `<tr>
-				  <td scope="col">${index + 1}</td>
-				  <td scope="col">${nombres}</td>
-				  <td scope="col">${apellidos}</td>
-				  <td scope="col">${usuario}</td>
-				  <td scope="col">${ntipo}</td>
-				  <td scope="col">
-				  <button class="btn btn-primary btn-xs" onclick="editarUsuario(${id_usuario})"><i class="far fa-edit"></i></button>
-				  <button class="btn btn-danger btn-xs" onclick="eliminarUsuario(${id_usuario})"><i class="fas fa-trash-alt"></i></button>
-				  </td>
+				  <th scope="col">${index + 1}</th>
+				  <th scope="col">${username}</th>
+				  <th scope="col">${nombre}</th>
+				  <th scope="col">${email}</th>
+				  <th scope="col">${rol}</th>
+				  <th scope="col">
+				  <button class="btn btn-primary btn-xs" onclick="editarUsuario(${id})"><i class="far fa-edit"></i></button>
+				  <button class="btn btn-danger btn-xs" onclick="eliminarUsuario(${id})"><i class="fas fa-trash-alt"></i></button>
+				  </th>
 				  </tr>
 			`;
     }
@@ -180,12 +180,12 @@ function editarUsuario(id) {
 }
 
 function mostrarDatosForm(record) {
-  const { id_usuario, usuario, nombres, apellidos, tipo } = record;
-  document.querySelector("#id_usuario").value = id_usuario;
-  document.querySelector("#usuario").value = usuario;
-  document.querySelector("#nombres").value = nombres;
-  document.querySelector("#apellidos").value = apellidos;
-  document.querySelector("#tipo").value = tipo;
+  const { id, username, nombre, email, rol } = record;
+  document.querySelector("#id").value = id;
+  document.querySelector("#username").value = username;
+  document.querySelector("#nombre").value = nombre;
+  document.querySelector("#email").value = email;
+  document.querySelector("#rol").value = rol;
 }
 
 function eliminarUsuario(id) {
@@ -223,8 +223,8 @@ function aplicarFiltro(e) {
 
 function limpiarForm(op) {
   miForm.reset();
-  document.querySelector("#id_usuario").value = "0";
-  document.querySelector("#tipo").value = "1";
+  document.querySelector("#id").value = "0";
+  document.querySelector("#rol").value = "administrador";
 
   if (op) {
     document.querySelector("#password").removeAttribute("required");

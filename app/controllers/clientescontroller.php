@@ -20,14 +20,14 @@ class ClientesController extends Controller
   public function save()
   {
     if ($_POST["id_cliente"] == "0") {
-      if (count($this->clientes->getClienteByName($_POST["nombre"])) > 0) {
+      if (count($this->clientes->getClienteByName($_POST["nombres"])) > 0) {
         $info = array('success' => false, 'msg' => "El cliente ya existe");
       } else {
         $records = $this->clientes->save($_POST);
         $info = array('success' => true, 'msg' => "Registro guardado con exito");
       }
     } else {
-      if (count($this->clientes->getClienteByNameAndId($_POST["nombre"], $_POST["id_alumno"])) > 0) {
+      if (count($this->clientes->getClienteByNameAndId($_POST["nombres"], $_POST["id_cliente"])) > 0) {
         $info = array('success' => false, 'msg' => "El cliente ya existe");
       } else {
         $records = $this->clientes->update($_POST);

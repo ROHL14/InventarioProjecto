@@ -23,14 +23,14 @@ class UsuariosController extends Controller
 				$info = array('success' => false, 'msg' => "El usuario ya existe");
 			} else {
 				$records = $this->user->save($_POST);
-				$info = array('success' => true, 'msg' => "Registro guardado con exito");
+				$info = array('success' => true, 'msg' => "Usuario guardado con exito");
 			}
 		} else {
 			if (count($this->user->getUserByNameAndId($_POST["username"], $_POST["id"])) > 0) {
 				$info = array('success' => false, 'msg' => "El usuario ya existe");
 			} else {
 				$records = $this->user->update($_POST);
-				$info = array('success' => true, 'msg' => "Registro guardado con exito");
+				$info = array('success' => true, 'msg' => "Usuario actualizado con exito");
 			}
 		}
 		echo json_encode($info);

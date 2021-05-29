@@ -22,26 +22,26 @@ eventListeners();
 function eventListeners() {
   document.addEventListener("DOMContentLoaded", cargarDatos);
   searchText.addEventListener("input", aplicarFiltro);
-  btnNew.addEventListener("click", agregarEquipo);
-  miform.addEventListener("submit", guardarEquipo);
-  btnCancelar.addEventListener("click", cancelarEquipo);
+  btnNew.addEventListener("click", agregarProducto);
+  miform.addEventListener("submit", guardarProducto);
+  btnCancelar.addEventListener("click", cancelarProducto);
 }
 
 //Funciones
 
-function cancelarEquipo() {
+function cancelarProducto() {
   panelDatos.classList.remove("d-none");
   panelFormulario.classList.add("d-none");
   cargarDatos();
 }
 
-function guardarEquipo(e) {
+function guardarProducto(e) {
   e.preventDefault();
   const formdata = new FormData(miForm);
-  API.saveEquipo(formdata)
+  API.saveProducto(formdata)
     .then((data) => {
       if (data.success) {
-        cancelarEquipo();
+        cancelarProducto();
         Swal.fire({
           icon: "info",
           text: data.msg,
@@ -59,14 +59,14 @@ function guardarEquipo(e) {
     });
 }
 
-function agregarEquipo() {
+function agregarProducto() {
   panelDatos.classList.add("d-none");
   panelFormulario.classList.remove("d-none");
   limpiarForm();
 }
 
 function cargarDatos() {
-  API.loadEquipo()
+  API.loadProductos()
     .then((data) => {
       if (data.success) {
         objDatos.records = data.records;
@@ -107,9 +107,10 @@ function crearTabla() {
     objDatos.recordsFilter = objDatos.records.map((item) => item);
   } else {
     objDatos.recordsFilter = objDatos.records.filter((item) => {
-      const { nombre, categoria } = item;
+      const { nombre_producto, categoria } = item;
       if (
-        nombre.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        nombre_producto.toUpperCase().search(objDatos.filter.toUpperCase()) !=
+          -1 ||
         categoria.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
       ) {
         return item;
@@ -121,15 +122,26 @@ function crearTabla() {
   let html = "";
   objDatos.recordsFilter.forEach((item, index) => {
     if (index >= recordIni && index <= recordFin) {
-      const { id_equipo, nombre, stock, categoria } = item;
+      const {
+        id_producto,
+        nombre_producto,
+        descripcion,
+        precio,
+        cantidad,
+        fecha_agregado,
+        categoria,
+      } = item;
       html += `<tr>
 			      <th scope="col">${index + 1}</th>
-			      <th scope="col">${nombre}</th>
-			      <th scope="col">${stock}</th>
+			      <th scope="col">${nombre_producto}</th>
+            <th scope="col">${descripcion}</th>
+            <th scope="col">$ ${precio}</th>
+			      <th scope="col">${cantidad}</th>
+            <th scope="col">${fecha_agregado}</th>
             <th scope="col">${categoria}</th>
 			      <th scope="col">
-            <button class='btn btn-primary btn-xs' onclick='editarEquipo("${id_equipo}")'><i class='far fa-edit'></i></button>
-            <button class='btn btn-danger btn-xs' onclick='eliminarEquipo("${id_equipo}")'><i class='fas fa-trash-alt'></i></button>
+            <button class='btn btn-primary btn-xs' onclick='editarProducto("${id_producto}")'><i class='far fa-edit'></i></button>
+            <button class='btn btn-danger btn-xs' onclick='eliminarProducto("${id_producto}")'><i class='fas fa-trash-alt'></i></button>
             </th>
 			    </tr>`;
     }
@@ -173,11 +185,11 @@ function crearPaginacion() {
   pagination.append(elSiguiente);
 }
 
-function editarEquipo(id) {
+function editarProducto(id) {
   limpiarForm(1);
   panelDatos.classList.add("d-none");
   panelFormulario.classList.remove("d-none");
-  API.getOneEquipo(id)
+  API.getOneProducto(id)
     .then((data) => {
       if (data.success) {
         mostrarDatosForm(data.records[0]);
@@ -195,14 +207,25 @@ function editarEquipo(id) {
 }
 
 function mostrarDatosForm(record) {
-  const { id_equipo, nombre, stock, id_categoria } = record;
-  document.querySelector("#id_equipo").value = id_equipo;
-  document.querySelector("#nombre").value = nombre;
-  document.querySelector("#stock").value = stock;
+  const {
+    id_producto,
+    nombre_producto,
+    descripcion,
+    cantidad,
+    precio,
+    fecha_agregado,
+    id_categoria,
+  } = record;
+  document.querySelector("#id_producto").value = id_producto;
+  document.querySelector("#nombre_producto").value = nombre_producto;
+  document.querySelector("#descripcion").value = descripcion;
+  document.querySelector("#precio").value = precio;
+  document.querySelector("#cantidad").value = cantidad;
+  document.querySelector("#fecha_agregado").value = fecha_agregado;
   document.querySelector("#id_categoria").value = id_categoria;
 }
 
-function eliminarEquipo(id) {
+function eliminarProducto(id) {
   Swal.fire({
     title: "Esta seguro de eliminar el registro?",
     showDenyButton: true,
@@ -210,10 +233,10 @@ function eliminarEquipo(id) {
     denyButtonText: `No`,
   }).then((result) => {
     if (result.isConfirmed) {
-      API.deleteEquipo(id)
+      API.deleteProducto(id)
         .then((data) => {
           if (data.success) {
-            cancelarEquipo();
+            cancelarProducto();
           } else {
             Swal.fire({
               icon: "error",
@@ -231,5 +254,5 @@ function eliminarEquipo(id) {
 
 function limpiarForm(op) {
   miForm.reset();
-  document.querySelector("#id_equipo").value = "0";
+  document.querySelector("#id_producto").value = "0";
 }

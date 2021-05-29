@@ -102,7 +102,6 @@
 							<div class="col-sm-10">
 								<select class="form-control" id="rol" name="rol" required>
 									<option value="administrador" selected>Administrador</option>
-									<option value="supervisor">Supervisor</option>
 									<option value="empleado">Empleado</option>
 								</select>
 							</div>

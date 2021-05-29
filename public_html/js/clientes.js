@@ -5,7 +5,6 @@ const searchText = document.querySelector("#txtSearch");
 const btnNew = document.querySelector("#btnAgregar");
 const panelDatos = document.querySelector("#panelDatos");
 const panelFormulario = document.querySelector("#panelFormulario");
-const idCinta = document.querySelector("#id_cinta");
 const miForm = document.querySelector("#miform");
 const btnCancelar = document.querySelector("#btnCancelar");
 const recordShow = 4;
@@ -22,26 +21,26 @@ eventListeners();
 function eventListeners() {
   document.addEventListener("DOMContentLoaded", cargarDatos);
   searchText.addEventListener("input", aplicarFiltro);
-  btnNew.addEventListener("click", agregarAlumno);
-  miform.addEventListener("submit", guardarAlumno);
-  btnCancelar.addEventListener("click", cancelarAlumno);
+  btnNew.addEventListener("click", agregarCliente);
+  miform.addEventListener("submit", guardarCliente);
+  btnCancelar.addEventListener("click", cancelarCliente);
 }
 
 //Funciones
 
-function cancelarAlumno() {
+function cancelarCliente() {
   panelDatos.classList.remove("d-none");
   panelFormulario.classList.add("d-none");
   cargarDatos();
 }
 
-function guardarAlumno(e) {
+function guardarCliente(e) {
   e.preventDefault();
   const formdata = new FormData(miForm);
-  API.saveAlumno(formdata)
+  API.saveCliente(formdata)
     .then((data) => {
       if (data.success) {
-        cancelarAlumno();
+        cancelarCliente();
         Swal.fire({
           icon: "info",
           text: data.msg,
@@ -59,41 +58,26 @@ function guardarAlumno(e) {
     });
 }
 
-function agregarAlumno() {
+function agregarCliente() {
   panelDatos.classList.add("d-none");
   panelFormulario.classList.remove("d-none");
   limpiarForm();
 }
 
 function cargarDatos() {
-  API.loadAlumnos()
+  API.loadClientes()
     .then((data) => {
       if (data.success) {
         objDatos.records = data.records;
         objDatos.currentPage = 1;
         crearTabla();
-        return API.loadCintas();
       } else {
         mensaje.textContent = data.msg;
       }
     })
-    .then((data) => {
-      rellenarCintas(data.records);
-    })
     .catch((error) => {
       console.error("Error:", error);
     });
-}
-
-function rellenarCintas(records) {
-  idCinta.innerHTML = "";
-  records.forEach((item) => {
-    const { id_cinta, color } = item;
-    const optionCate = document.createElement("option");
-    optionCate.value = id_cinta;
-    optionCate.textContent = color;
-    idCinta.append(optionCate);
-  });
 }
 
 function aplicarFiltro(e) {
@@ -107,10 +91,11 @@ function crearTabla() {
     objDatos.recordsFilter = objDatos.records.map((item) => item);
   } else {
     objDatos.recordsFilter = objDatos.records.filter((item) => {
-      const { nombre, color } = item;
+      const { nombres, apellidos, email } = item;
       if (
-        nombre.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        color.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
+        nombres.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        apellidos.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        email.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
       ) {
         return item;
       }
@@ -121,30 +106,17 @@ function crearTabla() {
   let html = "";
   objDatos.recordsFilter.forEach((item, index) => {
     if (index >= recordIni && index <= recordFin) {
-      const {
-        id_alumno,
-        nombre,
-        apellido,
-        dui,
-        fechanac,
-        email,
-        telefono,
-        estado,
-        color,
-      } = item;
+      const { id_cliente, nombres, apellidos, telefono, email, dui } = item;
       html += `<tr>
 			      <th scope="col">${index + 1}</th>
-			      <th scope="col">${nombre}</th>
-            <th scope="col">${apellido}</th>
-            <th scope="col">${dui}</th>
-			      <th scope="col">${fechanac}</th>
-            <th scope="col">${email}</th>
+			      <th scope="col">${nombres}</th>
+            <th scope="col">${apellidos}</th>
             <th scope="col">${telefono}</th>
-			      <th scope="col">${estado}</th>
-            <th scope="col">${color}</th>
+            <th scope="col">${email}</th>
+            <th scope="col">${dui}</th>
 			      <th scope="col">
-            <button class='btn btn-primary btn-xs' onclick='editarAlumno("${id_alumno}")'><i class='far fa-edit'></i></button>
-            <button class='btn btn-danger btn-xs' onclick='eliminarAlumno("${id_alumno}")'><i class='fas fa-trash-alt'></i></button>
+            <button class='btn btn-primary btn-xs' onclick='editarCliente("${id_cliente}")'><i class='far fa-edit'></i></button>
+            <button class='btn btn-danger btn-xs' onclick='eliminarCliente("${id_cliente}")'><i class='fas fa-trash-alt'></i></button>
             </th>
 			    </tr>`;
     }
@@ -188,11 +160,11 @@ function crearPaginacion() {
   pagination.append(elSiguiente);
 }
 
-function editarAlumno(id) {
+function editarCliente(id) {
   limpiarForm(1);
   panelDatos.classList.add("d-none");
   panelFormulario.classList.remove("d-none");
-  API.getOneAlumno(id)
+  API.getOneCliente(id)
     .then((data) => {
       if (data.success) {
         mostrarDatosForm(data.records[0]);
@@ -210,29 +182,16 @@ function editarAlumno(id) {
 }
 
 function mostrarDatosForm(record) {
-  const {
-    id_alumno,
-    nombre,
-    apellido,
-    dui,
-    fechanac,
-    email,
-    telefono,
-    estado,
-    id_cinta,
-  } = record;
-  document.querySelector("#id_alumno").value = id_alumno;
-  document.querySelector("#nombre").value = nombre;
-  document.querySelector("#apellido").value = apellido;
-  document.querySelector("#dui").value = dui;
-  document.querySelector("#fechanac").value = fechanac;
+  const { id_cliente, nombres, apellidos, telefono, email, dui } = record;
+  document.querySelector("#id_cliente").value = id_cliente;
+  document.querySelector("#nombres").value = nombres;
+  document.querySelector("#apellidos").value = apellidos;
   document.querySelector("#email").value = email;
   document.querySelector("#telefono").value = telefono;
-  document.querySelector("#estado").value = estado;
-  document.querySelector("#id_cinta").value = id_cinta;
+  document.querySelector("#dui").value = dui;
 }
 
-function eliminarAlumno(id) {
+function eliminarCliente(id) {
   Swal.fire({
     title: "Esta seguro de eliminar el registro?",
     showDenyButton: true,
@@ -240,10 +199,10 @@ function eliminarAlumno(id) {
     denyButtonText: `No`,
   }).then((result) => {
     if (result.isConfirmed) {
-      API.deleteAlumno(id)
+      API.deleteCliente(id)
         .then((data) => {
           if (data.success) {
-            cancelarAlumno();
+            cancelarCliente();
           } else {
             Swal.fire({
               icon: "error",
@@ -261,5 +220,5 @@ function eliminarAlumno(id) {
 
 function limpiarForm(op) {
   miForm.reset();
-  document.querySelector("#id_alumno").value = "0";
+  document.querySelector("#id_cliente").value = "0";
 }

@@ -2,24 +2,24 @@
 include_once "app/models/productos.php";
 class ProductosController extends Controller
 {
-  private $producto;
+  private $productos;
 
   public function __construct($param)
   {
-    $this->producto = new Productos();
+    $this->productos = new Productos();
     parent::__construct("productos", $param, true);
   }
 
   public function getAll()
   {
-    $records = $this->producto->getAll();
+    $records = $this->productos->getAll();
     $info = array('success' => true, 'records' => $records);
     echo json_encode($info);
   }
 
   public function getAllCategorias()
   {
-    $records = $this->producto->getAllCategorias();
+    $records = $this->productos->getAllCategorias();
     $info = array('success' => true, 'records' => $records);
     echo json_encode($info);
   }
@@ -27,17 +27,17 @@ class ProductosController extends Controller
   public function save()
   {
     if ($_POST["id_producto"] == "0") {
-      if (count($this->producto->getProductoByName($_POST["nombre_producto"])) > 0) {
+      if (count($this->productos->getProductoByName($_POST["nombre_producto"])) > 0) {
         $info = array('success' => false, 'msg' => "El producto ya existe");
       } else {
-        $records = $this->producto->save($_POST);
+        $records = $this->productos->save($_POST);
         $info = array('success' => true, 'msg' => "Registro guardado con exito");
       }
     } else {
-      if (count($this->producto->getProductoByNameAndId($_POST["nombre_producto"], $_POST["id_producto"])) > 0) {
+      if (count($this->productos->getProductoByNameAndId($_POST["nombre_producto"], $_POST["id_producto"])) > 0) {
         $info = array('success' => false, 'msg' => "El producto ya existe");
       } else {
-        $records = $this->producto->update($_POST);
+        $records = $this->productos->update($_POST);
         $info = array('success' => true, 'msg' => "Registro guardado con exito");
       }
     }
@@ -46,7 +46,7 @@ class ProductosController extends Controller
 
   public function getOneProducto()
   {
-    $records = $this->producto->getOneProducto($_GET["id"]);
+    $records = $this->productos->getOneProducto($_GET["id"]);
     if (count($records) > 0) {
       $info = array('success' => true, 'records' => $records);
     } else {
@@ -57,7 +57,7 @@ class ProductosController extends Controller
 
   public function deleteProducto()
   {
-    $records = $this->producto->deleteProducto($_GET["id"]);
+    $records = $this->productos->deleteProducto($_GET["id"]);
     $info = array('success' => true, 'msg' => 'producto eliminado con exito');
     echo json_encode($info);
   }

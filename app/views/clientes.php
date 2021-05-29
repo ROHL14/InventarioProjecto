@@ -19,7 +19,7 @@
     <section id="centro">
       <div class="content-panel mt-4" id="panelDatos">
         <h4>
-          <i class="fas fa-user-graduate"></i>
+          <i class="fas fa-person-booth"></i>
           <span> Clientes </span>
           <button class="btn btn-dark btn-md ml-4" id="btnAgregar">
             <i class="fa fa-plus"></i>
@@ -42,8 +42,8 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Corr</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
                 <th scope="col">Telefono</th>
                 <th scope="col">Email</th>
                 <th scope="col">DUI</th>
@@ -68,22 +68,22 @@
         <div class="row">
           <div class="col-md-10 mx-auto">
             <h4>
-              <i class="fas fa-user-graduate"></i>
+              <i class="fas fa-person-booth"></i>
               <span> clientes </span>
             </h4>
             <hr>
             <form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
-              <input type="hidden" id="id_alumno" name="id_alumno" value="0" class="campo">
+              <input type="hidden" id="id_cliente" name="id_cliente" value="0" class="campo">
               <div class="form-group row">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="nombres" class="col-sm-2 col-form-label">Nombres</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="nombre" name="nombre" placeholder="Nombre" required autofocus>
+                  <input type="text" class="form-control campo" id="nombres" name="nombres" placeholder="Nombres" required autofocus>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+                <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="apellido" name="apellido" placeholder="Apellido" required>
+                  <input type="text" class="form-control campo" id="apellidos" name="apellidos" placeholder="Apellidos" required>
                 </div>
               </div>
               <div class="form-group row">
@@ -98,20 +98,19 @@
                   <input type="email" class="form-control campo" rows="3" id="email" name="email" />
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="dui" class="col-sm-2 col-form-label">DUI</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI" required>
+                </div>
+              </div>
+              <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
           </div>
-          <div class="form-group row">
-            <label for="dui" class="col-sm-2 col-form-label">DUI</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI">
-            </div>
-          </div>
-          <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
-          <button type="submit" class="btn btn-success">Guardar</button>
-          </form>
         </div>
       </div>
-  </div>
-  </section>
+    </section>
 
   </div>
   <?php include "app/views/secciones/scripts.php" ?>

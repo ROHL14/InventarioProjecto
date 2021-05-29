@@ -43,7 +43,10 @@
               <tr>
                 <th scope="col">Corr</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Precio</th>
                 <th scope="col">Cantidad en stock</th>
+                <th scope="col">Fecha Agregado</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">&nbsp;</th>
               </tr>
@@ -82,7 +85,7 @@
               <div class="form-group row">
                 <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                 <div class="col-sm-10">
-                  <input type="textarea" class="form-control campo" id="descripcion" name="descripcion" required>
+                  <textarea class="form-control campo" id="descripcion" name="descripcion" required></textarea>
                 </div>
               </div>
 
