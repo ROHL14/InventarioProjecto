@@ -18,15 +18,15 @@ class UsuariosController extends Controller
 
 	public function save()
 	{
-		if ($_POST["id_usuario"] == "0") {
-			if (count($this->user->getUserByName($_POST["usuario"])) > 0) {
+		if ($_POST["id"] == "0") {
+			if (count($this->user->getUserByName($_POST["username"])) > 0) {
 				$info = array('success' => false, 'msg' => "El usuario ya existe");
 			} else {
 				$records = $this->user->save($_POST);
 				$info = array('success' => true, 'msg' => "Registro guardado con exito");
 			}
 		} else {
-			if (count($this->user->getUserByNameAndId($_POST["usuario"], $_POST["id_usuario"])) > 0) {
+			if (count($this->user->getUserByNameAndId($_POST["username"], $_POST["id"])) > 0) {
 				$info = array('success' => false, 'msg' => "El usuario ya existe");
 			} else {
 				$records = $this->user->update($_POST);

@@ -30,7 +30,8 @@ class Productos extends BaseDeDatos
   public function save($data)
   {
     return $this->executeInsert("
-    insert into productos set nombre_producto='{$data['nombre_producto']}', 
+    insert into productos set 
+    nombre_producto='{$data['nombre_producto']}', 
     descripcion='{$data['descripcion']}',
     cantidad='{$data['cantidad']}',
     precio='{$data['precio']}', 
@@ -42,7 +43,8 @@ class Productos extends BaseDeDatos
   public function update($data)
   {
     return $this->executeUpdate("
-    update productos set nombre_producto='{$data['nombre_producto']}', 
+    update productos set 
+    nombre_producto='{$data['nombre_producto']}', 
     descripcion='{$data['descripcion']}', 
     cantidad='{$data['cantidad']}',
     precio='{$data['precio']}', 

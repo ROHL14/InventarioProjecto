@@ -41,10 +41,10 @@
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Corr</th>
-							<th scope="col">Nombres</th>
-							<th scope="col">Apellidos</th>
-							<th scope="col">Usuario</th>
-							<th scope="col">Tipo</th>
+							<th scope="col">Username</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Email</th>
+							<th scope="col">Rol</th>
 							<th scope="col">&nbsp;</th>
 						</tr>
 					</thead>
@@ -72,11 +72,11 @@
 					</h4>
 					<hr>
 					<form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
-						<input type="hidden" name="id_usuario" id="id_usuario" value="0">
+						<input type="hidden" name="id" id="id" value="0">
 						<div class="form-group row">
-							<label for="usuario" class="col-sm-2 col-form-label">Usuario:</label>
+							<label for="username" class="col-sm-2 col-form-label">Username:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="usuario" name="usuario" required autofocus>
+								<input type="text" class="form-control" id="username" name="username" required autofocus>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -86,23 +86,24 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="nombres" class="col-sm-2 col-form-label">Nombres:</label>
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="nombres" name="nombres" required>
+								<input type="text" class="form-control" id="nombre" name="nombre" required>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="apellidos" class="col-sm-2 col-form-label">Apellidos:</label>
+							<label for="email" class="col-sm-2 col-form-label">Email:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="apellidos" name="apellidos" required>
+								<input type="email" class="form-control" id="email" name="email" required>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="tipo" class="col-sm-2 col-form-label">Tipo de usuario:</label>
+							<label for="rol" class="col-sm-2 col-form-label">Rol:</label>
 							<div class="col-sm-10">
-								<select class="form-control" id="tipo" name="tipo" required>
-									<option value="1" selected>Administrador</option>
-									<option value="2">Usuario</option>
+								<select class="form-control" id="rol" name="rol" required>
+									<option value="administrador" selected>Administrador</option>
+									<option value="supervisor">Supervisor</option>
+									<option value="empleado">Empleado</option>
 								</select>
 							</div>
 						</div>

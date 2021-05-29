@@ -23,7 +23,7 @@
           <span> Productos </span>
           <button class="btn btn-dark btn-md ml-4" id="btnAgregar">
             <i class="fa fa-plus"></i>
-            Agregar Productos
+            Agregar Producto
           </button>
         </h4>
         <hr>
@@ -71,18 +71,39 @@
             </h4>
             <hr>
             <form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
-              <input type="hidden" id="id_Productos" name="id_producto" value="0" class="campo">
+              <input type="hidden" id="id_producto" name="id_producto" value="0" class="campo">
               <div class="form-group row">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="nombre_producto" class="col-sm-2 col-form-label">Nombre del Producto</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="nombre" name="nombre" placeholder="Nombre del Producto" required autofocus>
+                  <input type="text" class="form-control campo" id="nombre_producto" name="nombre_producto" placeholder="Nombre del Producto" required autofocus>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="stock" class="col-sm-2 col-form-label">Cantidad en Stock</label>
+                <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" rows="3" id="stock" name="stock" />
+                  <input type="textarea" class="form-control campo" id="descripcion" name="descripcion" required>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="cantidad" class="col-sm-2 col-form-label">Cantidad en Stock</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control campo" id="cantidad" name="cantidad" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="precio" class="col-sm-2 col-form-label">Precio</label>
+                <div class="col-sm-10">
+                  <input type="decimal" class="form-control campo" id="precio" name="precio" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="fecha_agregado" class="col-sm-2 col-form-label">Fecha</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control campo" id="fecha_agregado" name="fecha_agregado" />
                 </div>
               </div>
 
