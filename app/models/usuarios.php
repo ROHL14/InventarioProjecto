@@ -9,38 +9,38 @@ class Usuarios extends BaseDeDatos
 
 	public function getAll()
 	{
-		return $this->executeQuery("Select id_usuario, nombres, apellidos, usuario, if(tipo=1,'Administrador','Usuario') as ntipo from usuarios order by id_usuario");
+		return $this->executeQuery("Select id, username, password, nombre, email, rol from usuarios order by id");
 	}
 
-	public function getUserByName($name)
+	public function getUserByName($username)
 	{
-		return $this->executeQuery("Select id_usuario, nombres, apellidos, usuario, if(tipo=1,'Administrador','Usuario') as ntipo from usuarios where usuario='$name'");
+		return $this->executeQuery("Select id, username, password, nombre, email, rol from usuarios where username='$username'");
 	}
 
-	public function getUserByNameAndId($name, $id)
+	public function getUserByNameAndId($username, $id)
 	{
-		return $this->executeQuery("Select id_usuario, nombres, apellidos, usuario, if(tipo=1,'Administrador','Usuario') as ntipo from usuarios where usuario='$name' and id_usuario<>'$id'");
+		return $this->executeQuery("Select id, username, password, nombre, email, rol from usuarios where username='$username' and id<>'$id'");
 	}
 
 	public function save($data)
 	{
-		return $this->executeInsert("insert into usuarios set usuario='{$data['usuario']}',password=md5('{$data['password']}'),nombres='{$data['nombres']}',apellidos='{$data['apellidos']}',tipo='{$data['tipo']}'");
+		return $this->executeInsert("insert into usuarios set username='{$data['username']}',password=md5('{$data['password']}'), nombre='{$data['nombre']}', email='{$data['email']}, rol='{$data['rol']}'");
 		//echo $this->conexion->error;
 	}
 
 	public function update($data)
 	{
-		return $this->executeUpdate("update usuarios set usuario='{$data['usuario']}',password=if('{$data['password']}'='', password,md5('{$data['password']}')),nombres='{$data['nombres']}',apellidos='{$data['apellidos']}',tipo='{$data['tipo']}' where id_usuario='{$data['id_usuario']}'");
+		return $this->executeUpdate("update usuarios set username='{$data['username']}',password=if('{$data['password']}'='', password,md5('{$data['password']}')), nombre='{$data['nombre']}', email='{$data['email']}, rol='{$data['rol']}' where id='{$data['id']}'");
 		//echo $this->conexion->error;
 	}
 
 	public function getOneUser($id)
 	{
-		return $this->executeQuery("Select id_usuario, nombres, apellidos, usuario, tipo from usuarios where id_usuario='$id'");
+		return $this->executeQuery("Select id, nombre, username, rol from usuarios where id='$id'");
 	}
 
 	public function deleteUser($id)
 	{
-		return $this->executeUpdate("delete from usuarios where id_usuario='$id'");
+		return $this->executeUpdate("delete from usuarios where id='$id'");
 	}
 }

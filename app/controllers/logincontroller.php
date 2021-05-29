@@ -16,11 +16,11 @@ class LoginController extends Controller
 			if (!isset($_SESSION)) {
 				session_start();
 			}
-			$_SESSION["id_usuario"] = $record["id_usuario"];
-			$_SESSION["tipo"] = $record["tipo"];
-			$_SESSION["usuario"] = $record["usuario"];
-			$_SESSION["nuser"] = "{$record['nombres']} {$record['apellidos']}";
-			if ($record["tipo"] == 1) {
+			$_SESSION["id"] = $record["id"];
+			$_SESSION["rol"] = $record["rol"];
+			$_SESSION["username"] = $record["username"];
+			$_SESSION["nombre"] = "{$record['nombre']}";
+			if ($record["rol"] == "administrador") {
 				$info = array('success' => true, 'msg' => 'Usuario correcto', 'link' => URL . "dashboard");
 			} else {
 				$info = array('success' => true, 'msg' => 'Usuario correcto', 'link' => URL . "dashboarduser");
