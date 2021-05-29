@@ -55,7 +55,7 @@ class Clientes extends BaseDeDatos
     return $this->executeQuery("Select * from clientes where id_cliente='$id'");
   }
 
-  public function deleteAlumno($id)
+  public function deleteCliente($id)
   {
     return $this->executeUpdate("delete from clientes where id_cliente='$id'");
   }

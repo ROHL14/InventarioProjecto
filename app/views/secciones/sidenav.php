@@ -14,21 +14,25 @@
           <i class="fas fa-user"></i>
           <span class="nav_name">Usuarios</span>
         </a>
-        <a href="<?php echo URL ?>alumnos" class="nav_link">
-          <i class="fas fa-user-graduate"></i>
-          <span class="nav_name">Alumnos</span>
+        <a href="<?php echo URL ?>clientes" class="nav_link">
+          <i class="fas fa-person-booth"></i>
+          <span class="nav_name">Clientes</span>
         </a>
-        <a href="<?php echo URL ?>equipo" class="nav_link">
+        <a href="<?php echo URL ?>productos" class="nav_link">
           <i class="fas fa-dolly-flatbed"></i>
-          <span class="nav_name">Equipo</span>
+          <span class="nav_name">Productos</span>
         </a>
         <a href="<?php echo URL ?>categorias" class="nav_link">
           <i class="fas fa-inbox"></i>
           <span class="nav_name">Categorias</span>
         </a>
-        <a href="<?php echo URL ?>prestamos" class="nav_link">
-          <i class="far fa-handshake"></i>
-          <span class="nav_name">Prestamos</span>
+        <a href="<?php echo URL ?>entradas" class="nav_link">
+          <i class="far fa-arrow-alt-circle-up"></i>
+          <span class="nav_name">Entradas</span>
+        </a>
+        <a href="<?php echo URL ?>salidas" class="nav_link">
+          <i class="far fa-arrow-alt-circle-down"></i>
+          <span class="nav_name">Salidas</span>
         </a>
       </div>
     </div>

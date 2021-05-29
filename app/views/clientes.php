@@ -20,7 +20,7 @@
       <div class="content-panel mt-4" id="panelDatos">
         <h4>
           <i class="fas fa-user-graduate"></i>
-          <span> Alumnos </span>
+          <span> Clientes </span>
           <button class="btn btn-dark btn-md ml-4" id="btnAgregar">
             <i class="fa fa-plus"></i>
             Agregar Cliente
@@ -98,20 +98,20 @@
                   <input type="email" class="form-control campo" rows="3" id="email" name="email" />
                 </div>
               </div>
-              </div>
-              <div class="form-group row">
-                <label for="dui" class="col-sm-2 col-form-label">DUI</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI">
-                </div>
-              </div>
-              <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
-              <button type="submit" class="btn btn-success">Guardar</button>
-            </form>
           </div>
+          <div class="form-group row">
+            <label for="dui" class="col-sm-2 col-form-label">DUI</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI">
+            </div>
+          </div>
+          <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
+          </form>
         </div>
       </div>
-    </section>
+  </div>
+  </section>
 
   </div>
   <?php include "app/views/secciones/scripts.php" ?>

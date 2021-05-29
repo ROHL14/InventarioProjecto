@@ -1,6 +1,6 @@
 <?php
 include_once "app/models/clientes.php";
-class Clientes extends Controller
+class ClientesController extends Controller
 {
   private $clientes;
 
@@ -13,13 +13,6 @@ class Clientes extends Controller
   public function getAll()
   {
     $records = $this->clientes->getAll();
-    $info = array('success' => true, 'records' => $records);
-    echo json_encode($info);
-  }
-
-  public function getAllCLientes()
-  {
-    $records = $this->clientes->getAllCLientes();
     $info = array('success' => true, 'records' => $records);
     echo json_encode($info);
   }
