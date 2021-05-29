@@ -8,3 +8,4 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>public_html/css/sidenav.css">
 <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>public_html/css/cards.css">
+<link rel="icon" href="<?php echo URL; ?>public_html/images/favicon.ico" />
