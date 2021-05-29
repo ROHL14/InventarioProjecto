@@ -20,10 +20,10 @@
       <div class="content-panel mt-4" id="panelDatos">
         <h4>
           <i class="fas fa-dolly-flatbed"></i>
-          <span> Equipo </span>
+          <span> Productos </span>
           <button class="btn btn-dark btn-md ml-4" id="btnAgregar">
             <i class="fa fa-plus"></i>
-            Agregar Equipo
+            Agregar Productos
           </button>
         </h4>
         <hr>
@@ -67,15 +67,15 @@
           <div class="col-md-10 mx-auto">
             <h4>
               <i class="fas fa-dolly-flatbed"></i>
-              <span> Equipo </span>
+              <span> Productos </span>
             </h4>
             <hr>
             <form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
-              <input type="hidden" id="id_equipo" name="id_equipo" value="0" class="campo">
+              <input type="hidden" id="id_Productos" name="id_producto" value="0" class="campo">
               <div class="form-group row">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="nombre" name="nombre" placeholder="Nombre del equipo" required autofocus>
+                  <input type="text" class="form-control campo" id="nombre" name="nombre" placeholder="Nombre del Producto" required autofocus>
                 </div>
               </div>
 
@@ -104,7 +104,7 @@
 
   </div>
   <?php include "app/views/secciones/scripts.php" ?>
-  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/equipo.js"></script>
+  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/productos.js"></script>
 </body>
 
 </html>
