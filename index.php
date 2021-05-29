@@ -1,5 +1,5 @@
 <?php
-define('URL', '/taekwondo/');
+define('URL', '/inventarioprojecto/');
 
 require_once "app/controllers/errorescontroller.php";
 require_once "app/controllers/controller.php";

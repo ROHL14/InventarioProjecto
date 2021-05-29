@@ -1,4 +1,4 @@
-const BASE_API = "/taekwondo/";
+const BASE_API = "/inventario/";
 
 class Api {
   async loadCategorias() {
