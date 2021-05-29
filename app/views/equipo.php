@@ -11,7 +11,7 @@
       <i class="fas fa-bars" id="header-toggle"></i>
     </div>
     <div>
-      <?php echo $_SESSION["nuser"]; ?>
+      <?php echo $_SESSION["nombre"]; ?>
     </div>
   </header>
   <?php include_once "app/views/secciones/sidenav.php" ?>
