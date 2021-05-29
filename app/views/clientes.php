@@ -23,7 +23,7 @@
           <span> Alumnos </span>
           <button class="btn btn-dark btn-md ml-4" id="btnAgregar">
             <i class="fa fa-plus"></i>
-            Agregar Alumno
+            Agregar Cliente
           </button>
         </h4>
         <hr>
@@ -44,12 +44,9 @@
                 <th scope="col">Corr</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th scope="col">DUI</th>
-                <th scope="col">Fecha de nacimiento</th>
-                <th scope="col">Email</th>
                 <th scope="col">Telefono</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Cinta</th>
+                <th scope="col">Email</th>
+                <th scope="col">DUI</th>
                 <th scope="col">&nbsp;</th>
               </tr>
             </thead>
@@ -72,7 +69,7 @@
           <div class="col-md-10 mx-auto">
             <h4>
               <i class="fas fa-user-graduate"></i>
-              <span> Alumnos </span>
+              <span> clientes </span>
             </h4>
             <hr>
             <form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
@@ -90,15 +87,9 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="dui" class="col-sm-2 col-form-label">DUI</label>
+                <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="fechanac" class="col-sm-2 col-form-label">fecha de nacimiento</label>
-                <div class="col-sm-10">
-                  <input type="date" class="form-control campo" id="fechanac" name="fechanac" required>
+                  <input type="text" class="form-control campo" rows="3" id="telefono" name="telefono" />
                 </div>
               </div>
               <div class="form-group row">
@@ -107,24 +98,11 @@
                   <input type="email" class="form-control campo" rows="3" id="email" name="email" />
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control campo" rows="3" id="telefono" name="telefono" />
-                </div>
               </div>
               <div class="form-group row">
-                <label for="estado" class="col-sm-2 col-form-label">Estado</label>
+                <label for="dui" class="col-sm-2 col-form-label">DUI</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control campo" rows="3" id="estado" name="estado" />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="id_cinta" class="col-sm-2 col-form-label">Cinta</label>
-                <div class="col-sm-10">
-                  <select class="form-control campo" id="id_cinta" name="id_cinta" required>
-
-                  </select>
+                  <input type="text" class="form-control campo" id="dui" name="dui" placeholder="DUI">
                 </div>
               </div>
               <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
@@ -137,7 +115,7 @@
 
   </div>
   <?php include "app/views/secciones/scripts.php" ?>
-  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/alumnos.js"></script>
+  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/clientes.js"></script>
 </body>
 
 </html>
