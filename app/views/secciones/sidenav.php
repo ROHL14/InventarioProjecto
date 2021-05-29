@@ -18,10 +18,6 @@
           <i class="fas fa-user-graduate"></i>
           <span class="nav_name">Alumnos</span>
         </a>
-        <a href="<?php echo URL ?>torneos" class="nav_link">
-          <i class="fas fa-award"></i>
-          <span class="nav_name">Torneos</span>
-        </a>
         <a href="<?php echo URL ?>equipo" class="nav_link">
           <i class="fas fa-dolly-flatbed"></i>
           <span class="nav_name">Equipo</span>
@@ -30,19 +26,10 @@
           <i class="fas fa-inbox"></i>
           <span class="nav_name">Categorias</span>
         </a>
-        <a href="<?php echo URL ?>paises" class="nav_link">
-          <i class="fas fa-globe-americas"></i>
-          <span class="nav_name">Paises</span>
+        <a href="<?php echo URL ?>prestamos" class="nav_link">
+          <i class="far fa-handshake"></i>
+          <span class="nav_name">Prestamos</span>
         </a>
-        <a href="<?php echo URL ?>cintas" class="nav_link">
-          <i class="fas fa-bookmark"></i>
-          <span class="nav_name">Cintas</span>
-        </a>
-        <a href="<?php echo URL ?>horarios" class="nav_link">
-          <i class="fas fa-clock"></i>
-          <span class="nav_name">Horarios</span>
-        </a>
-
       </div>
     </div>
     <a href="<?php echo URL ?>login/cerrar" class="nav_link">
