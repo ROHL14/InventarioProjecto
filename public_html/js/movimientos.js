@@ -2,11 +2,7 @@
 const tableContent = document.querySelector("#contentTable table tbody");
 const pagination = document.querySelector(".pagination");
 const searchText = document.querySelector("#txtSearch");
-//const btnNew = document.querySelector("#btnAgregar");
 const panelDatos = document.querySelector("#panelDatos");
-const panelFormulario = document.querySelector("#panelFormulario");
-const miForm = document.querySelector("#miform");
-const btnCancelar = document.querySelector("#btnCancelar");
 const recordShow = 4;
 const API = new Api();
 const objDatos = {
@@ -22,20 +18,12 @@ eventListeners();
 function eventListeners() {
   document.addEventListener("DOMContentLoaded", cargarDatos);
   searchText.addEventListener("input", aplicarFiltro);
-  miform.addEventListener("submit", guardarSalida);
-  btnCancelar.addEventListener("click", cancelarSalida);
 }
 
 //Funciones
 
-function cancelarSalida() {
-  panelDatos.classList.remove("d-none");
-  panelFormulario.classList.add("d-none");
-  cargarDatos();
-}
-
 function cargarDatos() {
-  API.loadProdSalidas()
+  API.loadMovimientos()
     .then((data) => {
       if (data.success) {
         objDatos.records = data.records;
@@ -61,11 +49,13 @@ function crearTabla() {
     objDatos.recordsFilter = objDatos.records.map((item) => item);
   } else {
     objDatos.recordsFilter = objDatos.records.filter((item) => {
-      const { nombre_producto, categoria } = item;
+      const { nombre_producto, categoria, username, tipo_mov } = item;
       if (
         nombre_producto.toUpperCase().search(objDatos.filter.toUpperCase()) !=
           -1 ||
-        categoria.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
+        categoria.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        username.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
+        tipo_mov.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
       ) {
         return item;
       }
@@ -79,24 +69,29 @@ function crearTabla() {
       const {
         id_producto,
         nombre_producto,
-        descripcion,
         precio,
-        cantidad,
         categoria,
+        cantidad_inicial,
+        cantidad_final,
+        precio_inicial,
+        precio_final,
+        tipo_mov,
+        fecha_movimiento,
+        username,
       } = item;
       html += `
           <tr>
 			      <th scope="col">${index + 1}</th>
 			      <th scope="col">${nombre_producto}</th>
+            <th scope="col">$${precio}</th>
             <th scope="col">${categoria}</th>
-            <th scope="col">$ ${precio}</th>
-			      <th scope="col">${cantidad}</th>
-			      <th scope="col">
-              <button class='btn btn-dark btn-xs' onclick='agregarCantidad("${id_producto}")'>
-                <i class='far fa-edit'></i>
-                Quitar al stock
-              </button>
-            </th>
+			      <th scope="col">${cantidad_inicial}</th>
+            <th scope="col">${cantidad_final}</th>
+            <th scope="col">${precio_inicial}</th>
+            <th scope="col">${precio_final}</th>
+            <th scope="col">${tipo_mov}</th>
+            <th scope="col">${fecha_movimiento}</th>
+            <th scope="col">${username}</th>
 			    </tr>`;
     }
   });
@@ -137,68 +132,4 @@ function crearPaginacion() {
     crearTabla();
   };
   pagination.append(elSiguiente);
-}
-
-function agregarCantidad(id) {
-  limpiarForm(1);
-  panelDatos.classList.add("d-none");
-  panelFormulario.classList.remove("d-none");
-  API.getOneProducto(id)
-    .then((data) => {
-      if (data.success) {
-        mostrarDatosForm(data.records[0]);
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.msg,
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-function mostrarDatosForm(record) {
-  fecha = new Date();
-  hoy =
-    fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
-  const { id_producto, cantidad, precio } = record;
-  document.querySelector("#id_producto").value = id_producto;
-
-  document.querySelector("#tipo_movimiento").value = "salida";
-  document.querySelector("#cantidad_inicial").value = cantidad;
-  document.querySelector("#precio_inicial").value = precio * cantidad;
-  document.querySelector("#precio").value = precio;
-  document.querySelector("#fecha_movimiento").value = hoy;
-}
-
-function guardarSalida(e) {
-  e.preventDefault();
-  const formdata = new FormData(miForm);
-  API.saveProdSalidaCantidad(formdata)
-    .then((data) => {
-      if (data.success) {
-        cancelarSalida();
-        Swal.fire({
-          icon: "info",
-          text: data.msg,
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.msg,
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error", error);
-    });
-}
-
-function limpiarForm(op) {
-  miForm.reset();
-  document.querySelector("#id_producto").value = "0";
 }

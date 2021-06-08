@@ -19,11 +19,7 @@
     <section id="centro">
       <div class="content-panel mt-4" id="panelDatos">
 
-        <button class="btn btn-dark btn-md" id="btnAgregar">
-          Prestar equipo
-        </button>
-
-        <div id="contentTable" class="pt-1">
+        <div id="contentTable">
           <div class="row mb-1">
             <div class="input-group col-md-4">
               <input class="form-control py-2" type="search" placeholder="Buscar" id="txtSearch">
@@ -38,9 +34,10 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Corr</th>
-                <th scope="col">Alumno</th>
-                <th scope="col">Equipo</th>
-                <th scope="col">Estado</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
                 <th scope="col">&nbsp;</th>
               </tr>
             </thead>
@@ -58,44 +55,39 @@
           </div>
         </div>
       </div>
+
       <div class="content-panel m-4 d-none" id="panelFormulario">
         <div class="row">
           <div class="col-md-10 mx-auto">
-            <h4><i class="fa fa-user"></i>Prestamos
-            </h4>
-            <hr>
+
             <form class="form-horizontal" role="form" id="miform" enctype="multipart/form-data">
-              <input type="hidden" id="id_prestamo" name="id_prestamo" value="0" class="campo">
+              <input type="hidden" id="id_producto" name="id_producto" value="0" class="campo">
+
+              <input type="hidden" id="tipo_movimiento" name="tipo_movimiento" value="0" class="campo">
+              <input type="hidden" id="cantidad_inicial" name="cantidad_inicial" value="0" class="campo">
+              <input type="hidden" id="precio_inicial" name="precio_inicial" value="0" class="campo">
+              <input type="hidden" id="precio" name="precio" value="0" class="campo">
+              <input type="hidden" id="fecha_movimiento" name="fecha_movimiento" value="0" class="campo">
 
               <div class="form-group row">
-                <label for="id_alumno" class="col-sm-2 col-form-label">Alumno</label>
+                <label for="cantidad" class="col-sm-2 col-form-label">Quitar cantidad en Stock</label>
                 <div class="col-sm-10">
-                  <select class="form-control campo" id="id_alumno" name="id_alumno" required>
-
-                  </select>
+                  <input type="number" class="form-control campo" id="cantidad" name="cantidad" min="1" step="1" required />
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label for="id_equipo" class="col-sm-2 col-form-label">Equipo</label>
-                <div class="col-sm-10">
-                  <select class="form-control campo" id="id_equipo" name="id_equipo" required>
-
-                  </select>
-                </div>
-              </div>
+              <button type="submit" class="btn btn-success">Guardar</button>
               <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
           </div>
         </div>
       </div>
-  </div>
-  </div>
-  </section>
+
+    </section>
+
   </div>
   <?php include "app/views/secciones/scripts.php" ?>
-  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/prestamos.js"></script>
+  <script type="text/javascript" src="<?php echo URL; ?>public_html/js/salidas.js"></script>
 </body>
 
 </html>

@@ -2,7 +2,6 @@
 const tableContent = document.querySelector("#contentTable table tbody");
 const pagination = document.querySelector(".pagination");
 const searchText = document.querySelector("#txtSearch");
-const btnNew = document.querySelector("#btnAgregar");
 const panelDatos = document.querySelector("#panelDatos");
 const panelFormulario = document.querySelector("#panelFormulario");
 const miForm = document.querySelector("#miform");
@@ -15,57 +14,27 @@ const objDatos = {
   currentPage: 1,
   filter: "",
 };
+
 //Eventos
 eventListeners();
 
 function eventListeners() {
   document.addEventListener("DOMContentLoaded", cargarDatos);
   searchText.addEventListener("input", aplicarFiltro);
-  btnNew.addEventListener("click", agregarCliente);
-  miform.addEventListener("submit", guardarCliente);
-  btnCancelar.addEventListener("click", cancelarCliente);
+  miform.addEventListener("submit", guardarEntrada);
+  btnCancelar.addEventListener("click", cancelarEntrada);
 }
 
 //Funciones
 
-function cancelarCliente() {
+function cancelarEntrada() {
   panelDatos.classList.remove("d-none");
   panelFormulario.classList.add("d-none");
   cargarDatos();
 }
 
-function guardarCliente(e) {
-  e.preventDefault();
-  const formdata = new FormData(miForm);
-  API.saveCliente(formdata)
-    .then((data) => {
-      if (data.success) {
-        cancelarCliente();
-        Swal.fire({
-          icon: "info",
-          text: data.msg,
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.msg,
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error", error);
-    });
-}
-
-function agregarCliente() {
-  panelDatos.classList.add("d-none");
-  panelFormulario.classList.remove("d-none");
-  limpiarForm();
-}
-
 function cargarDatos() {
-  API.loadClientes()
+  API.loadProdEntradas()
     .then((data) => {
       if (data.success) {
         objDatos.records = data.records;
@@ -91,11 +60,11 @@ function crearTabla() {
     objDatos.recordsFilter = objDatos.records.map((item) => item);
   } else {
     objDatos.recordsFilter = objDatos.records.filter((item) => {
-      const { nombres, apellidos, email } = item;
+      const { nombre_producto, categoria } = item;
       if (
-        nombres.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        apellidos.toUpperCase().search(objDatos.filter.toUpperCase()) != -1 ||
-        email.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
+        nombre_producto.toUpperCase().search(objDatos.filter.toUpperCase()) !=
+          -1 ||
+        categoria.toUpperCase().search(objDatos.filter.toUpperCase()) != -1
       ) {
         return item;
       }
@@ -106,17 +75,26 @@ function crearTabla() {
   let html = "";
   objDatos.recordsFilter.forEach((item, index) => {
     if (index >= recordIni && index <= recordFin) {
-      const { id_cliente, nombres, apellidos, telefono, email, dui } = item;
-      html += `<tr>
+      const {
+        id_producto,
+        nombre_producto,
+        descripcion,
+        precio,
+        cantidad,
+        categoria,
+      } = item;
+      html += `
+          <tr>
 			      <th scope="col">${index + 1}</th>
-			      <th scope="col">${nombres}</th>
-            <th scope="col">${apellidos}</th>
-            <th scope="col">${telefono}</th>
-            <th scope="col">${email}</th>
-            <th scope="col">${dui}</th>
+			      <th scope="col">${nombre_producto}</th>
+            <th scope="col">${categoria}</th>
+            <th scope="col">$ ${precio}</th>
+			      <th scope="col">${cantidad}</th>
 			      <th scope="col">
-            <button class='btn btn-primary btn-xs' onclick='editarCliente("${id_cliente}")'><i class='far fa-edit'></i></button>
-            <button class='btn btn-danger btn-xs' onclick='eliminarCliente("${id_cliente}")'><i class='fas fa-trash-alt'></i></button>
+              <button class='btn btn-dark btn-xs' onclick='agregarCantidad("${id_producto}")'>
+                <i class='far fa-edit'></i>
+                Agregar al stock
+              </button>
             </th>
 			    </tr>`;
     }
@@ -160,11 +138,11 @@ function crearPaginacion() {
   pagination.append(elSiguiente);
 }
 
-function editarCliente(id) {
+function agregarCantidad(id) {
   limpiarForm(1);
   panelDatos.classList.add("d-none");
   panelFormulario.classList.remove("d-none");
-  API.getOneCliente(id)
+  API.getOneProducto(id)
     .then((data) => {
       if (data.success) {
         mostrarDatosForm(data.records[0]);
@@ -182,43 +160,44 @@ function editarCliente(id) {
 }
 
 function mostrarDatosForm(record) {
-  const { id_cliente, nombres, apellidos, telefono, email, dui } = record;
-  document.querySelector("#id_cliente").value = id_cliente;
-  document.querySelector("#nombres").value = nombres;
-  document.querySelector("#apellidos").value = apellidos;
-  document.querySelector("#email").value = email;
-  document.querySelector("#telefono").value = telefono;
-  document.querySelector("#dui").value = dui;
+  fecha = new Date();
+  hoy =
+    fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+  const { id_producto, cantidad, precio } = record;
+  document.querySelector("#id_producto").value = id_producto;
+
+  document.querySelector("#tipo_movimiento").value = "entrada";
+  document.querySelector("#cantidad_inicial").value = cantidad;
+  document.querySelector("#precio_inicial").value = precio * cantidad;
+  document.querySelector("#precio").value = precio;
+  document.querySelector("#fecha_movimiento").value = hoy;
 }
 
-function eliminarCliente(id) {
-  Swal.fire({
-    title: "Esta seguro de eliminar el registro?",
-    showDenyButton: true,
-    confirmButtonText: `Si`,
-    denyButtonText: `No`,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      API.deleteCliente(id)
-        .then((data) => {
-          if (data.success) {
-            cancelarCliente();
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: data.msg,
-            });
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+function guardarEntrada(e) {
+  e.preventDefault();
+  const formdata = new FormData(miForm);
+  API.saveProdEntradaCantidad(formdata)
+    .then((data) => {
+      if (data.success) {
+        cancelarEntrada();
+        Swal.fire({
+          icon: "info",
+          text: data.msg,
         });
-    }
-  });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: data.msg,
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error", error);
+    });
 }
 
 function limpiarForm(op) {
   miForm.reset();
-  document.querySelector("#id_cliente").value = "0";
+  document.querySelector("#id_producto").value = "0";
 }

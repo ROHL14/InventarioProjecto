@@ -46,9 +46,7 @@ class Productos extends BaseDeDatos
     update productos set 
     nombre_producto='{$data['nombre_producto']}', 
     descripcion='{$data['descripcion']}', 
-    cantidad='{$data['cantidad']}',
     precio='{$data['precio']}', 
-    fecha_agregado='{$data['fecha_agregado']}',
     id_categoria='{$data['id_categoria']}' 
     where id_producto='{$data['id_producto']}'
     ");

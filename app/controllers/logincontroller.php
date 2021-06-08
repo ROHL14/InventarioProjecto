@@ -7,6 +7,12 @@ class LoginController extends Controller
 	{
 		$this->user = new Login();
 		parent::__construct("login", $param);
+
+		/*if (!isset($_SESSION)) {
+			parent::__construct("login", $param);
+		} else {
+			parent::__construct("dashboard", $param, true);
+		}*/
 	}
 	public function validar()
 	{
@@ -20,11 +26,12 @@ class LoginController extends Controller
 			$_SESSION["rol"] = $record["rol"];
 			$_SESSION["username"] = $record["username"];
 			$_SESSION["nombre"] = "{$record['nombre']}";
-			if ($record["rol"] == "administrador") {
+			$info = array('success' => true, 'msg' => 'Usuario correcto', 'link' => URL . "dashboard");
+			/*if ($record["rol"] == "administrador") {
 				$info = array('success' => true, 'msg' => 'Usuario correcto', 'link' => URL . "dashboard");
 			} else {
 				$info = array('success' => true, 'msg' => 'Usuario correcto', 'link' => URL . "dashboarduser");
-			}
+			}*/
 		} else {
 			$info = array('success' => false, 'msg' => 'Usuario o password incorrecto');
 		}

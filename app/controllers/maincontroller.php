@@ -9,10 +9,10 @@ class MainController extends Controller
 		parent::__construct("main", $param);
 		//parent::__construct("login", $param);
 	}
-	public function getAllCategorias()
+	/*public function getAllCategorias()
 	{
 		$records = $this->libros->getAllCategorias();
 		$info = array('success' => true, 'records' => $records);
 		echo json_encode($info);
-	}
+	}*/
 }

@@ -32,6 +32,10 @@ function eventListeners() {
 function cancelarProducto() {
   panelDatos.classList.remove("d-none");
   panelFormulario.classList.add("d-none");
+  document.querySelector("#cantidad").classList.remove("d-none");
+  document.querySelector("#fecha_agregado").classList.remove("d-none");
+  document.querySelector("#cantidadlabel").classList.remove("d-none");
+  document.querySelector("#fechalabel").classList.remove("d-none");
   cargarDatos();
 }
 
@@ -41,6 +45,10 @@ function guardarProducto(e) {
   API.saveProducto(formdata)
     .then((data) => {
       if (data.success) {
+        document.querySelector("#cantidad").classList.remove("d-none");
+        document.querySelector("#fecha_agregado").classList.remove("d-none");
+        document.querySelector("#cantidadlabel").classList.remove("d-none");
+        document.querySelector("#fechalabel").classList.remove("d-none");
         cancelarProducto();
         Swal.fire({
           icon: "info",
@@ -220,9 +228,12 @@ function mostrarDatosForm(record) {
   document.querySelector("#nombre_producto").value = nombre_producto;
   document.querySelector("#descripcion").value = descripcion;
   document.querySelector("#precio").value = precio;
-  document.querySelector("#cantidad").value = cantidad;
-  document.querySelector("#fecha_agregado").value = fecha_agregado;
   document.querySelector("#id_categoria").value = id_categoria;
+
+  document.querySelector("#cantidad").classList.add("d-none");
+  document.querySelector("#fecha_agregado").classList.add("d-none");
+  document.querySelector("#cantidadlabel").classList.add("d-none");
+  document.querySelector("#fechalabel").classList.add("d-none");
 }
 
 function eliminarProducto(id) {

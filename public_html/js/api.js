@@ -35,8 +35,20 @@ class Api {
     return data;
   }
 
-  async loadSalidas() {
-    const query = await fetch(`${BASE_API}salidas/getAll`);
+  async loadProdEntradas() {
+    const query = await fetch(`${BASE_API}entradas/getAllProductos`);
+    const data = await query.json();
+    return data;
+  }
+
+  async loadProdSalidas() {
+    const query = await fetch(`${BASE_API}salidas/getAllProductos`);
+    const data = await query.json();
+    return data;
+  }
+
+  async loadMovimientos() {
+    const query = await fetch(`${BASE_API}movimientos/getAll`);
     const data = await query.json();
     return data;
   }
@@ -78,7 +90,16 @@ class Api {
     return data;
   }
 
-  async saveSalida(form) {
+  async saveProdEntradaCantidad(form) {
+    const query = await fetch(`${BASE_API}entradas/save`, {
+      method: "POST",
+      body: form,
+    });
+    const data = await query.json();
+    return data;
+  }
+
+  async saveProdSalidaCantidad(form) {
     const query = await fetch(`${BASE_API}salidas/save`, {
       method: "POST",
       body: form,
@@ -112,12 +133,6 @@ class Api {
     return data;
   }
 
-  async getOneSalida(id) {
-    const query = await fetch(`${BASE_API}salidas/getOneSalida?id=${id}`);
-    const data = await query.json();
-    return data;
-  }
-
   // Delete
   async deleteUser(id) {
     const query = await fetch(`${BASE_API}usuarios/deleteUser?id=${id}`);
@@ -139,12 +154,6 @@ class Api {
 
   async deleteCliente(id) {
     const query = await fetch(`${BASE_API}clientes/deleteCliente?id=${id}`);
-    const data = await query.json();
-    return data;
-  }
-
-  async deleteSalida(id) {
-    const query = await fetch(`${BASE_API}salidas/deleteSalidas?id=${id}`);
     const data = await query.json();
     return data;
   }
