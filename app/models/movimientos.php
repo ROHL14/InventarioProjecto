@@ -16,7 +16,7 @@ class Movimientos extends BaseDeDatos
     return $this->executeQuery("
     Select a.*, b.*, c.*, d.* from categorias d inner join (productos c 
     inner join (usuarios b inner join movimientos a on b.id=a.id_usuario) 
-    on c.id_producto=a.id_producto) on c.id_categoria=d.id_categoria");
+    on c.id_producto=a.id_producto) on c.id_categoria=d.id_categoria order by a.id_movimiento desc");
   }
 
   public function getAllEntradas()

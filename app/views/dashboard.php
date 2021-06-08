@@ -20,54 +20,59 @@
 
 			<div class="cards-list">
 
-				<a href="<?php echo URL ?>asistencia" class="card-link">
+				<div class="card-content">
 					<div class="card card-1">
-						<div class="card_image">
-							<img src="<?php echo URL ?>public_html/images/calendario.png" alt="">
-						</div>
 						<div class="card_title">
-							<p>Asistencia</p>
+							<p>Productos Totales</p>
 						</div>
-					</div>
-				</a>
+						<div class="card_information" id="productosTotales">
 
-				<a href="<?php echo URL ?>prestamos" class="card-link">
+						</div>
+
+					</div>
+				</div>
+
+				<div class="card-content">
 					<div class="card card-2">
-						<div class="card_image">
-							<img src="<?php echo URL ?>public_html/images/apreton-de-manos.png" alt="">
-						</div>
 						<div class="card_title">
-							<p>Prestamos</p>
+							<p>Productos distintos</p>
 						</div>
-					</div>
-				</a>
+						<div class="card_information" id="productosDistintos">
 
-				<a href="<?php echo URL ?>participantes" class="card-link">
-					<div class="card card-3">
-						<div class="card_image">
-							<img src="<?php echo URL ?>public_html/images/torneo.png" alt="">
 						</div>
-						<div class="card_title">
-							<p>Inscribir a Torneo</p>
-						</div>
-					</div>
-				</a>
 
-				<a href="<?php echo URL ?>informes" class="card-link">
-					<div class="card card-3">
-						<div class="card_image">
-							<img src="<?php echo URL ?>public_html/images/reporte.png" alt="">
-						</div>
-						<div class="card_title">
-							<p>Informes</p>
-						</div>
 					</div>
-				</a>
+				</div>
+
+				<div class="card-content">
+					<div class="card card-3">
+						<div class="card_title">
+							<p>Valor del Inventario</p>
+						</div>
+						<div class="card_information" id="valorInventario">
+
+						</div>
+
+					</div>
+				</div>
+
+				<div class="card-content">
+					<div class="card card-3">
+						<div class="card_title">
+							<p>Usuarios Registrados</p>
+						</div>
+						<div class="card_information" id="usuariosRegistrados">
+
+						</div>
+
+					</div>
+				</div>
 
 			</div>
 		</section>
 	</div>
 	<?php include_once "app/views/secciones/scripts.php" ?>
+	<script type="text/javascript" src="<?php echo URL; ?>public_html/js/dashboard.js"></script>
 </body>
 
 </html>

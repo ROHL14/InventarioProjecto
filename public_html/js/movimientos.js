@@ -3,7 +3,7 @@ const tableContent = document.querySelector("#contentTable table tbody");
 const pagination = document.querySelector(".pagination");
 const searchText = document.querySelector("#txtSearch");
 const panelDatos = document.querySelector("#panelDatos");
-const recordShow = 4;
+const recordShow = 10;
 const API = new Api();
 const objDatos = {
   records: [],
