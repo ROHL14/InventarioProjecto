@@ -12,7 +12,6 @@
     </div>
     <div>
       <?php echo $_SESSION["nombre"]; ?>
-      <?php echo $_SESSION["id"]; ?>
     </div>
   </header>
   <?php include_once "app/views/secciones/sidenav.php" ?>

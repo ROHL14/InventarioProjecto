@@ -37,6 +37,10 @@
             <i class="far fa-save"></i>
             <span class="nav_name">Movimientos</span>
           </a>
+          <a href="<?php echo URL ?>reportes" class="nav_link">
+            <i class="far fa-file-alt"></i>
+            <span class="nav_name">Reportes</span>
+          </a>
         <?php } ?>
       </div>
     </div>
